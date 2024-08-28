@@ -11,7 +11,6 @@ import com.java.agendador_tarefas.infrastructure.entity.TarefasEntity;
 @Mapper(componentModel = "spring")
 public interface TarefasConverter {
 
-    @Mapping(source = "id", target = "id")
     TarefasEntity paraTarefasEntity(TarefasDTO dto);
 
     TarefasDTO paraTarefasDTO(TarefasEntity entity);
