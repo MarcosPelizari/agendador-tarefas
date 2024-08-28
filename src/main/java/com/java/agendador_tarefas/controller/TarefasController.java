@@ -15,19 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.java.agendador_tarefas.business.TarefasService;
 import com.java.agendador_tarefas.business.dto.TarefasDTO;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/tarefas")
+@RequiredArgsConstructor
 public class TarefasController {
 
     private final TarefasService tarefaService;
 
     
-
-    public TarefasController(TarefasService tarefaService) {
-        this.tarefaService = tarefaService;
-    }
 
     @PostMapping
     public ResponseEntity<TarefasDTO> gravarTarefa(@RequestBody TarefasDTO dto,
