@@ -3,7 +3,6 @@ package com.java.agendador_tarefas.business.mapper;
 import java.util.List;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import com.java.agendador_tarefas.business.dto.TarefasDTO;
 import com.java.agendador_tarefas.infrastructure.entity.TarefasEntity;
