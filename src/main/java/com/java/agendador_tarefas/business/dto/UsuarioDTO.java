@@ -1,4 +1,4 @@
-package com.java.agendador_tarefas.business;
+package com.java.agendador_tarefas.business.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
