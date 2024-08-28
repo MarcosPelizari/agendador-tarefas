@@ -1,8 +1,11 @@
-package com.java.agendador_tarefas.business.dto;
+package com.java.agendador_tarefas.infrastructure.entity;
+
 
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.java.agendador_tarefas.infrastructure.enums.StatusNotificacao;
 
 import lombok.AllArgsConstructor;
@@ -16,18 +19,16 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TarefaDTO {
+@Document("tarefa")
+public class TarefasEntity {
 
+    @Id 
     private String id;
     private String nomeTarefa;
     private String descricao;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime dataCriacao;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime dataEvento;
     private String emailUsuario;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime dataAlteracao;
     private StatusNotificacao statusNotificacao;
-
 }
