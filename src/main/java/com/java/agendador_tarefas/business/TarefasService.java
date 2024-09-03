@@ -33,12 +33,13 @@ public class TarefasService {
         TarefasEntity entity = tarefaConverter.paraTarefasEntity(dto);
 
         return tarefaConverter.paraTarefasDTO(
-            tarefaRepository.save(entity));
+                tarefaRepository.save(entity));
     }
 
     public List<TarefasDTO> buscaTarefaAgendadaPorPeriodo(LocalDateTime dataInicial, LocalDateTime dataFinal) {
         return tarefaConverter.paraListTarefasDTO(
-            tarefaRepository.findByDataEventoBetween(dataInicial, dataFinal));
+                tarefaRepository.findByDataEventoBetweenAndStatusNotificacao(dataInicial, dataFinal,
+                        StatusNotificacao.PENDENTE));
     }
 
     public List<TarefasDTO> buscaTarefaPorEmail(String token) {
@@ -50,16 +51,17 @@ public class TarefasService {
 
     public void deletarPorId(String id) {
         try {
-            tarefaRepository.deleteById(id);    
+            tarefaRepository.deleteById(id);
         } catch (ResourceNotFoundException e) {
-            throw new ResourceNotFoundException("Erro ao deletar tarefa, id inexistente " + id, 
-            e.getCause());
+            throw new ResourceNotFoundException("Erro ao deletar tarefa, id inexistente " + id,
+                    e.getCause());
         }
     }
 
     public TarefasDTO alteraStatus(StatusNotificacao status, String id) {
         try {
-            TarefasEntity entity = tarefaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada " + id));
+            TarefasEntity entity = tarefaRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada " + id));
             entity.setStatusNotificacao(status);
 
             return tarefaConverter.paraTarefasDTO(tarefaRepository.save(entity));
@@ -70,11 +72,12 @@ public class TarefasService {
 
     public TarefasDTO updateTarefas(TarefasDTO dto, String id) {
         try {
-            TarefasEntity entity = tarefaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada " + id));
+            TarefasEntity entity = tarefaRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada " + id));
             tarefaUpdateConverter.updateTArefas(dto, entity);
 
             return tarefaConverter.paraTarefasDTO(tarefaRepository.save(entity));
-            
+
         } catch (ResourceNotFoundException e) {
             throw new ResourceNotFoundException("Erro ao alterar o status da tarefa." + e.getCause());
         }
